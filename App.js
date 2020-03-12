@@ -1,31 +1,35 @@
 import React from "react";
-import { ScrollView, SafeAreaView } from "react-native";
+import { ScrollView, SafeAreaView, TouchableOpacity } from "react-native";
 import styled from "styled-components";
 import Card from "./components/Card";
-import { Icon } from "expo";
+import { Ionicons } from "@expo/vector-icons";
 import { NotificationIcon } from "./components/Icons";
 import Logo from "./components/Logo";
 import Course from "./components/Course";
+import Menu from "./components/Menu";
 
 export default function App() {
   return (
     <Container>
+      <Menu />
       <SafeAreaView>
         <ScrollView>
           <TitleBar>
             <Avatar source={require("./assets/avatar.jpg")} />
             <Title>Welcome back,</Title>
             <Name>Ore</Name>
-            <NotificationIcon
+            <TouchableOpacity
               style={{ position: "absolute", right: 20, top: 5 }}
-            />
+            >
+              <Ionicons name="ios-notifications" size={30} color="#546bfb" />
+            </TouchableOpacity>
           </TitleBar>
           <ScrollView
             style={{
               flexDirection: "row",
               padding: 20,
               paddingLeft: 12,
-              paddingTop: 30
+              paddingTop: 40
             }}
             horizontal={true}
             showsHorizontalScrollIndicator={false}
