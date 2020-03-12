@@ -125,14 +125,20 @@ class HomeScreen extends React.Component {
                 showsHorizontalScrollIndicator={false}
               >
                 {cards.map((card, index) => (
-                  <Card
+                  <TouchableOpacity
                     key={index}
-                    title={card.title}
-                    image={card.image}
-                    caption={card.caption}
-                    logo={card.logo}
-                    subtitle={card.subtitle}
-                  />
+                    onPress={() => {
+                      this.props.navigation.navigate("Section");
+                    }}
+                  >
+                    <Card
+                      title={card.title}
+                      image={card.image}
+                      caption={card.caption}
+                      logo={card.logo}
+                      subtitle={card.subtitle}
+                    />
+                  </TouchableOpacity>
                 ))}
               </ScrollView>
               <Subtitle>Popular Courses</Subtitle>
