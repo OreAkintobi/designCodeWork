@@ -172,7 +172,8 @@ const RootView = styled.View`
 const Container = styled.View`
   flex: 1;
   background-color: white;
-  border-radius: 10px;
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
 `;
 
 const AnimatedContainer = Animated.createAnimatedComponent(Container);
