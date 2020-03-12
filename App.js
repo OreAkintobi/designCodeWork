@@ -1,8 +1,15 @@
-import React from "react";
+import "react-native-gesture-handler";
+import * as React from "react";
+import { NavigationContainer } from "@react-navigation/native";
+import { createStackNavigator } from "@react-navigation/stack";
 import { createStore } from "redux";
 import { Provider } from "react-redux";
-import styled from "styled-components";
 import HomeScreen from "./screens/HomeScreen";
+import SectionScreen from "./screens/SectionScreen";
+import AppNavigator from "./navigator/AppNavigator";
+import TabNavigator from "./navigator/TabNavigator";
+
+const Stack = createStackNavigator();
 
 const initialState = {
   action: "",
@@ -26,7 +33,9 @@ const store = createStore(reducer);
 
 const App = () => (
   <Provider store={store}>
-    <HomeScreen />
+    <NavigationContainer>
+      <TabNavigator />
+    </NavigationContainer>
   </Provider>
 );
 
