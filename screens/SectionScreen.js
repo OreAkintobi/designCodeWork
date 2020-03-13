@@ -34,16 +34,16 @@ const SectionScreen = ({ route, navigation: { goBack } }) => {
       </TouchableOpacity>
       <Content>
         <WebView
-          source={{ html: htmlContent + htmlStyles }}
-          scalesPageToFit={false}
-          scrollEnabled={false}
-          onNavigationStateChange={event => {
-            console.log(event);
+          source={{ uri: "https://github.com/oreakintobi" }}
+          // scalesPageToFit={false}
+          // scrollEnabled={false}
+          // onNavigationStateChange={event => {
+          //   console.log(event);
 
-            if (event.url != "about:blank") {
-              Linking.openURL(event.url);
-            }
-          }}
+          //   if (event.url != "about:blank") {
+          //     Linking.openURL(event.url);
+          //   }
+          // }}
         />
       </Content>
     </Container>
@@ -77,7 +77,7 @@ img {
 
 const Content = styled.View`
   height: 100%;
-  padding: 20px;
+  padding: 0px;
 `;
 
 const Container = styled.View`
@@ -116,7 +116,7 @@ const CloseView = styled.View`
 `;
 
 const Cover = styled.View`
-  height: 375px;
+  height: 305px;
 `;
 
 const Image = styled.Image`

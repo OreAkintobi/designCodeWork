@@ -5,7 +5,8 @@ import {
   TouchableOpacity,
   Animated,
   Easing,
-  StatusBar
+  StatusBar,
+  Platform
 } from "react-native";
 import styled from "styled-components";
 import Card from "../components/Card";
@@ -39,6 +40,11 @@ class HomeScreen extends React.Component {
 
   componentDidMount() {
     StatusBar.setBarStyle("dark-content", true);
+
+    if (Platform.OS == "android") {
+      StatusBar.setBarStyle("dark-content", true);
+      StatusBar.setHidden(true);
+    }
 
     fetch("https://next.json-generator.com/api/json/get/VkIGrEVBu")
       .then(response => response.json())
@@ -172,18 +178,20 @@ class HomeScreen extends React.Component {
                 ))}
               </ScrollView>
               <Subtitle>Popular Courses</Subtitle>
-              {this.state.courses.map((course, index) => (
-                <Course
-                  key={index}
-                  image={{ uri: course.image }}
-                  title={course.title}
-                  subtitle={course.subtitle}
-                  logo={{ uri: course.logo }}
-                  author={course.author}
-                  avatar={{ uri: course.avatar }}
-                  caption={course.caption}
-                />
-              ))}
+              <CourseContainer>
+                {this.state.courses.map((course, index) => (
+                  <Course
+                    key={index}
+                    image={{ uri: course.image }}
+                    title={course.title}
+                    subtitle={course.subtitle}
+                    logo={{ uri: course.logo }}
+                    author={course.author}
+                    avatar={{ uri: course.avatar }}
+                    caption={course.caption}
+                  />
+                ))}
+              </CourseContainer>
             </ScrollView>
           </SafeAreaView>
         </AnimatedContainer>
@@ -197,6 +205,12 @@ export default connect(mapStateToProps, mapDispatchToProps)(HomeScreen);
 const RootView = styled.View`
   background: black;
   flex: 1;
+`;
+
+const CourseContainer = styled.View`
+  flex-direction: row;
+  flex-wrap: wrap;
+  padding-left: 10px;
 `;
 
 const Container = styled.View`
@@ -231,7 +245,8 @@ const Subtitle = styled.Text`
   font-weight: 600;
   font-size: 15px;
   margin-left: 20px;
-  margin-top: 20px;
+  margin-top: 10px;
+  margin-bottom: 5px;
   text-transform: uppercase;
 `;
 
