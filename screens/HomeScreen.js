@@ -31,12 +31,27 @@ function mapDispatchToProps(dispatch) {
 
 class HomeScreen extends React.Component {
   state = {
+    cards: [],
     scale: new Animated.Value(1),
     opacity: new Animated.Value(1)
   };
 
   componentDidMount() {
     StatusBar.setBarStyle("dark-content", true);
+
+    fetch("https://next.json-generator.com/api/json/get/VkIGrEVBu")
+      .then(response => response.json())
+      .then(responseJson => {
+        // console.log(responseJson);
+        return responseJson;
+      })
+      .then(cards => {
+        this.setState({ cards: cards });
+        // console.log(cards[0].image);
+      })
+      .catch(error => {
+        console.error(error);
+      });
   }
 
   componentDidUpdate() {
@@ -254,25 +269,25 @@ const cards = [
     logo: require("../assets/logo-react.png")
   },
   {
-    title: "React for Designers",
+    title: "Complete Studio Tutorial",
     image: require("../assets/background12.jpg"),
-    subtitle: "React Native",
+    subtitle: "Studio",
     caption: "2 of 12 sections",
-    logo: require("../assets/logo-react.png")
+    logo: require("../assets/logo-studio.png")
   },
   {
     title: "Beginners Guide to Redux",
     image: require("../assets/background13.jpg"),
-    subtitle: "React Native",
+    subtitle: "X-Code",
     caption: "3 of 12 sections",
-    logo: require("../assets/logo-react.png")
+    logo: require("../assets/logo-xcode.png")
   },
   {
-    title: "React Native for Beginners",
+    title: "Vue for Beginners",
     image: require("../assets/background14.jpg"),
-    subtitle: "React Native",
+    subtitle: "Vue",
     caption: "4 of 12 sections",
-    logo: require("../assets/logo-react.png")
+    logo: require("../assets/logo-vue.png")
   }
 ];
 
@@ -280,7 +295,7 @@ const courses = [
   {
     title: "Prototype in InVision Studio",
     subtitle: "10 Section",
-    image: require("../assets/background13.jpg"),
+    image: require("../assets/background16.jpg"),
     logo: require("../assets/logo-studio.png"),
     author: "Ore Akintobi",
     avatar: require("../assets/avatar.jpg"),
