@@ -32,6 +32,7 @@ function mapDispatchToProps(dispatch) {
 class HomeScreen extends React.Component {
   state = {
     cards: [],
+    courses: [],
     scale: new Animated.Value(1),
     opacity: new Animated.Value(1)
   };
@@ -47,7 +48,21 @@ class HomeScreen extends React.Component {
       })
       .then(cards => {
         this.setState({ cards: cards });
-        // console.log(cards[0].image);
+        // console.log(cards);
+      })
+      .catch(error => {
+        console.error(error);
+      });
+
+    fetch("https://next.json-generator.com/api/json/get/4yHewBVSd")
+      .then(response => response.json())
+      .then(responseJson => {
+        // console.log(responseJson);
+        return responseJson;
+      })
+      .then(courses => {
+        this.setState({ courses: courses });
+        // console.log(courses);
       })
       .catch(error => {
         console.error(error);
@@ -104,11 +119,9 @@ class HomeScreen extends React.Component {
                   style={{ position: "absolute", top: 0, left: 0 }}
                 >
                   <Avatar />
-                  {/* <Avatar source={require("../assets/avatar2.jpg")} /> */}
                 </TouchableOpacity>
                 <Title>Welcome back,</Title>
                 <Name>{this.props.name}</Name>
-                {/* <Name>Ore</Name> */}
                 <TouchableOpacity
                   style={{ position: "absolute", right: 20, top: 5 }}
                 >
@@ -139,7 +152,7 @@ class HomeScreen extends React.Component {
                 style={{ paddingBottom: 30 }}
                 showsHorizontalScrollIndicator={false}
               >
-                {cards.map((card, index) => (
+                {this.state.cards.map((card, index) => (
                   <TouchableOpacity
                     key={index}
                     onPress={() => {
@@ -150,24 +163,24 @@ class HomeScreen extends React.Component {
                   >
                     <Card
                       title={card.title}
-                      image={card.image}
+                      image={{ uri: card.image }}
                       caption={card.caption}
-                      logo={card.logo}
+                      logo={{ uri: card.logo }}
                       subtitle={card.subtitle}
                     />
                   </TouchableOpacity>
                 ))}
               </ScrollView>
               <Subtitle>Popular Courses</Subtitle>
-              {courses.map((course, index) => (
+              {this.state.courses.map((course, index) => (
                 <Course
                   key={index}
-                  image={course.image}
+                  image={{ uri: course.image }}
                   title={course.title}
                   subtitle={course.subtitle}
-                  logo={course.logo}
+                  logo={{ uri: course.logo }}
                   author={course.author}
-                  avatar={course.avatar}
+                  avatar={{ uri: course.avatar }}
                   caption={course.caption}
                 />
               ))}
@@ -212,17 +225,6 @@ const TitleBar = styled.View`
   margin-top: 20px;
   padding-left: 80px;
 `;
-
-// const Avatar = styled.Image`
-//   width: 44px;
-//   height: 44px;
-//   background: black;
-//   border-radius: 22px;
-//   margin-left: 26px;
-//   /* position: absolute; */
-//   left: 0;
-//   top: 0;
-// `;
 
 const Subtitle = styled.Text`
   color: #b8bece;

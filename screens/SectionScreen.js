@@ -11,9 +11,9 @@ const SectionScreen = ({ route, navigation: { goBack } }) => {
     <Container>
       <StatusBar hidden />
       <Cover>
-        <Image source={section.image} />
+        <Image source={{ uri: section.image }} />
         <Wrapper>
-          <Logo source={section.logo} />
+          <Logo source={{ uri: section.logo }} />
           <Subtitle>{section.subtitle}</Subtitle>
         </Wrapper>
         <Title>{section.title}</Title>
@@ -63,6 +63,7 @@ const htmlStyles = `
 * {
   font-family: -apple-system, Roboto;
   margin:0;
+  font-size: 30px;
   padding: 0;
 }
 
