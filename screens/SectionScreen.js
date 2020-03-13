@@ -1,7 +1,8 @@
 import React, { useEffect } from "react";
 import styled from "styled-components";
-import { StatusBar, TouchableOpacity } from "react-native";
+import { StatusBar, TouchableOpacity, Linking } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
+import { WebView } from "react-native-webview";
 
 const SectionScreen = ({ route, navigation: { goBack } }) => {
   const { section } = route.params;
@@ -31,11 +32,52 @@ const SectionScreen = ({ route, navigation: { goBack } }) => {
           />
         </CloseView>
       </TouchableOpacity>
+      <Content>
+        <WebView
+          source={{ html: htmlContent + htmlStyles }}
+          scalesPageToFit={false}
+          scrollEnabled={false}
+          onNavigationStateChange={event => {
+            console.log(event);
+
+            if (event.url != "about:blank") {
+              Linking.openURL(event.url);
+            }
+          }}
+        />
+      </Content>
     </Container>
   );
 };
 
 export default SectionScreen;
+
+const htmlContent = `
+<h2>This is a title</h2>
+<p>This <strong>is</strong> my <a href="https://github.com/oreakintobi">Github link</a></p>
+<img src="https://image.shutterstock.com/image-photo/bright-spring-view-cameo-island-260nw-1048185397.jpg"/>
+`;
+
+const htmlStyles = `
+<style>
+* {
+  font-family: -apple-system, Roboto;
+  margin:0;
+  padding: 0;
+}
+
+img {
+  width: 100%;
+  border-radius: 10px;
+  margin-top: 20px;
+}
+</style>
+`;
+
+const Content = styled.View`
+  height: 100%;
+  padding: 20px;
+`;
 
 const Container = styled.View`
   flex: 1;
