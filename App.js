@@ -4,10 +4,9 @@ import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
 import { createStore } from "redux";
 import { Provider } from "react-redux";
-import HomeScreen from "./screens/HomeScreen";
-import SectionScreen from "./screens/SectionScreen";
-import AppNavigator from "./navigator/AppNavigator";
 import TabNavigator from "./navigator/TabNavigator";
+// import ErrorBoundary from "./components/ErrorBoundary";
+import ErrorBoundary from "react-native-error-boundary";
 
 const Stack = createStackNavigator();
 
@@ -32,11 +31,13 @@ const reducer = (state = initialState, action) => {
 const store = createStore(reducer);
 
 const App = () => (
-  <Provider store={store}>
-    <NavigationContainer>
-      <TabNavigator />
-    </NavigationContainer>
-  </Provider>
+  <ErrorBoundary>
+    <Provider store={store}>
+      <NavigationContainer>
+        <TabNavigator />
+      </NavigationContainer>
+    </Provider>
+  </ErrorBoundary>
 );
 
 export default App;
