@@ -10,7 +10,7 @@ const Stack = createStackNavigator();
 
 const AppNavigator = () => (
   <NavigationContainer>
-    <Stack.Navigator>
+    <Stack.Navigator mode="modal">
       <Stack.Screen name="Home" component={HomeScreen} />
       <Stack.Screen name="Section" component={SectionScreen} />
       <Stack.Screen name="Projects" component={ProjectsScreen} />
