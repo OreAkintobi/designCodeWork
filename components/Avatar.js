@@ -1,14 +1,14 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import { connect } from "react-redux";
 
-function mapStateToProps(state) {
+const mapStateToProps = state => {
   return {
     name: state.name
   };
-}
+};
 
-function mapDispatchToProps(dispatch) {
+const mapDispatchToProps = dispatch => {
   return {
     updateName: name =>
       dispatch({
@@ -16,32 +16,26 @@ function mapDispatchToProps(dispatch) {
         name: name
       })
   };
-}
+};
 
-class Avatar extends React.Component {
-  state = {
-    photo: "https://uinames.com/api/photos/male/4.jpg"
-  };
+const Avatar = ({ updateName }) => {
+  const [photo, setPhoto] = useState(
+    "https://uinames.com/api/photos/male/4.jpg"
+  );
 
-  componentDidMount() {
+  useEffect(() => {
     fetch("https://uinames.com/api/?ext&region=nigeria", {
       headers: new Headers({})
     }).then(response =>
       response.json().then(response => {
-        // console.log(response);
-        this.setState({
-          photo: response.photo
-        });
-
-        this.props.updateName(response.name);
+        setPhoto(response.photo);
+        updateName(response.name);
       })
     );
-  }
+  }, []);
 
-  render() {
-    return <Image source={{ uri: this.state.photo }} />;
-  }
-}
+  return <Image source={{ uri: photo }} />;
+};
 
 export default connect(mapStateToProps, mapDispatchToProps)(Avatar);
 

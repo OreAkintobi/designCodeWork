@@ -1,21 +1,19 @@
 import React from "react";
 import styled from "styled-components";
 
-class CoursesScreen extends React.Component {
-  render() {
-    return (
-      <Container>
-        <Text>Courses Screen</Text>
-        <Button
-          title="Close"
-          onPress={() => {
-            this.props.navigation.goBack();
-          }}
-        />
-      </Container>
-    );
-  }
-}
+const CoursesScreen = ({ navigation }) => {
+  return (
+    <Container>
+      <Text>Courses Screen</Text>
+      <Button
+        title="Close"
+        onPress={() => {
+          navigation.goBack();
+        }}
+      />
+    </Container>
+  );
+};
 
 export default CoursesScreen;
 
